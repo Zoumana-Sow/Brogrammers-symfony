@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Brogrammers</title>
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" >
+        {# <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}" > #}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" >
+        <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" >
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <div class="main">
+            <div class="btn-menu">
+                <span><i class="fas fa-bars"></i></span>
+            </div>
+            <div class="menu">
+                <div class="brand">
+                    Gestion d'allocation des chambres
+                </div>
+                <ul>
+                    {% if app.user %}
+                        <li class="{% if current is defined and current == 'students' %}active{% endif %}"><a href="{{ path('students') }}">Liste des étudiants</a></li>
+                        <li class="{% if current is defined and current == 'rooms' %}active{% endif %}"><a href="{{ path('rooms') }}">Liste des chambres</a></li>
+                        <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                    {% else %}
+                        <li class="active"><a href="{{ path('app_login') }}">Connexion</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="content">
+                <div class="title">
+                    {% block title %}{% endblock %}
+                </div>
+                <div class="wrapper m-3">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+
+        <script src="{{ asset('js/all.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('js/validator.js') }}"></script>
+        <script src="{{ asset('js/script.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
